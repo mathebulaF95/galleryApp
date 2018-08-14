@@ -1,0 +1,32 @@
+<!--
+  Generated template for the HomePage page.
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Gallery</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div *ngIf="hasIt === 0">
+    <button ion-button full (click)= "navigate('u')">Upload Files</button>
+    <button ion-button full (click)= "navigate('v')">View Gallery</button>
+  </div>
+  <ion-row *ngIf="hasIt === 1">
+    <ion-col><button ion-button block (click)="uploads('camera')">Pic</button></ion-col>
+    <ion-col><button ion-button block (click)="uploads('audio')">Audio</button></ion-col>
+    <ion-col><button ion-button block (click)="uploads('video')">Video</button></ion-col>
+    <button ion-button full (click)= "navigate('b')">Back to menu</button>
+  </ion-row>
+  <ion-row *ngIf="hasIt === 2">
+    <ion-col><button ion-button block (click)="viewUploads('p')">view Pictures</button></ion-col>
+    <ion-col><button ion-button block (click)="viewUploads('a')">view Audio</button></ion-col>
+    <ion-col><button ion-button block (click)="viewUploads('v')">Video</button></ion-col>
+    <button ion-button full (click)= "navigate('b')">Back to menu</button>
+  </ion-row>
+  <div *ngIf="moo === 1">
+    <img *ngFor="let imgUrl of images" src={{imgUrl}}>
+    <button ion-button full (click)= "navigate('b')">Back to menu</button>
+  </div>
+</ion-content>

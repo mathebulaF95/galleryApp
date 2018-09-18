@@ -29,4 +29,23 @@
     <img *ngFor="let imgUrl of images" src={{imgUrl}}>
     <button ion-button full (click)= "navigate('b')">Back to menu</button>
   </div>
+  <div *ngIf="moo === 3">
+      <video *ngFor="let video of videos" src={{video}} type="video/mp4" controls  width="320" height="240"></video>
+      <button ion-button full (click)= "navigate('b')">Back to menu</button>
+      
+    </div>
+    <div *ngIf="moo === 4">
+      <!-- <video  type="audio/mp4" controls  width="320" height="240"></video> -->
+      <audio *ngFor="let audio of audios"  controls>
+        
+        <source src={{audio}} type="audio/mpeg">
+        <source src={{audio}} type="audio/ogg">
+        <source src={{audio}} type="audio/wav">
+        Your browser does not support the audio tag.
+      </audio>
+      <button ion-button full (click)= "navigate('b')">Back to menu</button>
+      
+    </div>
 </ion-content>
+
+

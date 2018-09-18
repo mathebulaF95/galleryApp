@@ -2,19 +2,15 @@ import { Component} from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 import { File } from '@ionic-native/file';
-/**
- * Generated class for the HomePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-declare var firebase;
+import firebase from 'firebase';
+
 @IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
 })
 export class HomePage {
+
  
   hasIt= 0;
   imageURI;
@@ -51,6 +47,7 @@ export class HomePage {
           promise = this.mediaCapture.captureAudio()
           break
       }
+
       promise.then((mediaFile: MediaFile[]) => {
         console.log(mediaFile)
        
@@ -137,11 +134,16 @@ export class HomePage {
       this.hasIt = -99;
       // this.moo = -99;
     }else if(cow === "v"){
-      this.moo = 2;
+      this.moo = 3;
+      this.getVideos();
+      this.hasIt = -99;
     }else if(cow === "a"){
-      this.moo = 0;
+      this.moo = 4;
+      this.getAudios();
+      this.hasIt = -99;
     }
   }
+
   b;
  imageUrl;
  count =0;
@@ -153,8 +155,47 @@ export class HomePage {
        this.b = {keyname : snap.key, name :snap.val().downloadUrl};
        this.imageUrl =  this.b.name;
        this.images.push(this.imageUrl);
+      //  console.log("++++++++++++++++++++++++++++"+this.imageUrl);
        return false;
      })
    });
+ }
+ imageVideoSrc : string;
+
+   imageEmp;
+   videos = [];
+   videoUrl;
+
+// j = "tttttttttttttttttttttttttttttttt";
+ getVideos(){
+  firebase.database().ref('/fireuploads/').on("value",(snapshot) =>{
+    snapshot.forEach((snap) =>{
+      this.b = {keyname : snap.key, name :snap.val().downloadUrl};
+      this.videoUrl =  this.b.name;
+      if(this.videoUrl.indexOf('.mp4') >= 0){
+        this.videos.push(this.videoUrl);
+      console.log("++++++++++++++++++++++++++++"+this.videoUrl);
+      }
+      return false;
+    })
+  });
+ }
+
+ 
+ audios = [];
+ audioUrl;
+
+ getAudios(){
+  firebase.database().ref('/fireuploads/').on("value",(snapshot) =>{
+    snapshot.forEach((snap) =>{
+      this.b = {keyname : snap.key, name :snap.val().downloadUrl};
+      this.audioUrl =  this.b.name;
+      if(this.audioUrl.indexOf('.m4a') >= 0){
+        this.audios.push(this.videoUrl);
+      console.log("++++++++++++++++++++++++++++"+this.audioUrl);
+      }
+      return false;
+    })
+  });
  }
 }

@@ -8,6 +8,15 @@ import { MyApp } from './app.component';
 import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 import { File } from '@ionic-native/file';
 import firebase from 'firebase';
+var config = {
+  apiKey: "AIzaSyBMdtPYPPiBArZg4ZfK8f6MAJvQ6_11wYU",
+  authDomain: "fir-list-c7516.firebaseapp.com",
+  databaseURL: "https://fir-list-c7516.firebaseio.com",
+  projectId: "fir-list-c7516",
+  storageBucket: "fir-list-c7516.appspot.com",
+  messagingSenderId: "151676499785"
+};
+firebase.initializeApp(config);
 
 @NgModule({
   declarations: [
